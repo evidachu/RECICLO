@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Reciclo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto p-4 max-w-5xl">
+        <div class="breadcrumb text-gray-500 mb-4">Beranda > Keranjang > Checkout</div>
+        
+        <!-- Progress Steps -->
+        <div class="flex justify-center mb-8">
+            <div class="flex items-center">
+                <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center">1</div>
+                <div class="text-green-600 mx-2">Checkout</div>
+                <div class="h-1 w-16 bg-gray-300"></div>
+                <div class="bg-gray-300 text-gray-600 rounded-full w-8 h-8 flex items-center justify-center">2</div>
+                <div class="text-gray-600 mx-2">Pembayaran</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+            <!-- Shipping Address -->
+            <div class="col-span-2">
+                <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                    <h2 class="text-lg font-semibold mb-4">Alamat Pengiriman</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold">Rumah</p>
+                                <p>John Doe</p>
+                                <p>Jl. Contoh No. 123</p>
+                                <p>Jakarta Selatan, 12345</p>
+                                <p>+62 812-3456-7890</p>
+                            </div>
+                            <button class="text-green-600 hover:text-green-700">Ubah</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Method -->
+                <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                    <h2 class="text-lg font-semibold mb-4">Metode Pengiriman</h2>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="shipping" class="mr-3">
+                            <div class="flex-1">
+                                <p class="font-semibold">JNE Regular</p>
+                                <p class="text-sm text-gray-600">Estimasi 2-3 hari</p>
+                            </div>
+                            <span class="font-semibold">Rp 15.000</span>
+                        </label>
+                        <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                            <input type="radio" name="shipping" class="mr-3">
+                            <div class="flex-1">
+                                <p class="font-semibold">JNE Express</p>
+                                <p class="text-sm text-gray-600">Estimasi 1-2 hari</p>
+                            </div>
+                            <span class="font-semibold">Rp 25.000</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
+                    <h2 class="text-lg font-semibold mb-4">Ringkasan Pesanan</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4 pb-4 border-b">
+                            <img src="https://via.placeholder.com/60" alt="Product" class="rounded-lg">
+                            <div class="flex-1">
+                                <p class="font-semibold">Jaket Denim Daur Ulang</p>
+                                <p class="text-sm text-gray-600">Quantity: 1</p>
+                                <p class="text-green-600 font-semibold">Rp 250.000</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>Subtotal</span>
+                                <span>Rp 250.000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Ongkos Kirim</span>
+                                <span>Rp 15.000</span>
+                            </div>
+                            <div class="flex justify-between font-semibold text-lg pt-2 border-t">
+                                <span>Total</span>
+                                <span>Rp 265.000</span>
+                            </div>
+                        </div>
+
+                        <a href="payment.html" class="block">
+                            <button class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700">
+                                Lanjut ke Pembayaran
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

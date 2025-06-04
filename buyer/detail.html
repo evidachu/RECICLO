@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclo - Detail Produk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<style>
+    .product-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+    .sidebar-info {
+        background-color: #F5F6FA;
+        border-radius: 12px;
+        padding: 1rem;
+        width: 50%;
+    }
+    .chat-button {
+        background-color: #374151;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        font-weight: 500;
+        width: 100%;
+        text-align: center;
+    }
+    .chat-button:hover {
+        background-color: #1f2937;
+    }
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 10;
+        display: none;
+    }
+    .popup {
+        background-color: white;
+        border-radius: 0.5rem;
+        width: 100%;
+        max-width: 400px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 20;
+        display: none;
+    }
+</style>
+<body>
+    <!-- Main Content -->
+    <div class="content max-w-7xl mx-auto p-6">
+        <div class="breadcrumb text-gray-500 mb-2">Home > Search > Upcycled Backpack</div>
+        <h1 class="text-2xl font-bold text-green-600 mb-4">Detail Produk</h1>
+        <div class="flex gap-6">
+            <!-- Product Image -->
+            <div class="w-2/3">
+                <img src="https://via.placeholder.com/500x400" alt="Upcycled Backpack" class="product-image rounded-lg">
+            </div>
+            <!-- Sidebar Info -->
+            <div class="sidebar-info bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-lg font-semibold mb-2">Upcycled Backpack</h2>
+                <p class="text-sm text-gray-600 mb-4">Terbuat dari bahan daur ulang. Hemat 2kg CO₂.</p>
+                <div class="flex space-x-2 mb-4">
+                    <button class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600">Beli Sekarang</button>
+                    <button class="bg-purple-300 text-white px-4 py-2 rounded hover:bg-purple-400">Simpan</button>
+                </div>
+                <!-- Chat Button -->
+                <button class="chat-button bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 block text-center" id="openChat">
+                    Chat dengan Penjual
+                </button>
+                <div class="text-sm text-gray-700 mt-4">
+                    <p class="mb-2"><strong>Deskripsi Produk</strong></p>
+                    <p class="mb-4">
+                        Upcycled Backpack adalah tas ramah lingkungan yang dirancang untuk mendukung gaya hidup berkelanjutan. 
+                        Tas ini dibuat dari bahan daur ulang berkualitas tinggi, seperti limbah tekstil dan plastik, yang diolah menjadi produk baru. 
+                        Dengan kapasitas 20 liter, tas ini sangat cocok untuk aktivitas sehari-hari, seperti bekerja, sekolah, atau perjalanan singkat.
+                        Fitur utama tas ini meliputi:
+                        <ul class="list-disc pl-5">
+                            <li>Material tahan air untuk melindungi barang bawaan Anda.</li>
+                            <li>Kompartemen utama yang luas dengan beberapa kantong tambahan untuk penyimpanan terorganisir.</li>
+                            <li>Desain ergonomis dengan tali bahu yang dapat disesuaikan untuk kenyamanan maksimal.</li>
+                            <li>Proses produksi yang hemat energi, mengurangi emisi karbon hingga 2kg CO₂ per tas.</li>
+                        </ul>
+                    </p>
+                    <p class="mb-2"><strong>Detail Penjual</strong></p>
+                    <p class="mb-4">EcoGoods Store<br>Bandung, Jawa Barat</p>
+                    <p class="mb-2"><strong>Spesifikasi Produk</strong></p>
+                    <ul class="list-disc pl-5">
+                        <li>Kapasitas: 20L</li>
+                        <li>Bahan: Daur Ulang</li>
+                        <li>Warna: Hitam</li>
+                        <li>Kondisi: Baru</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Popup -->
+    <div class="overlay"></div>
+    <div class="popup">
+        <div class="header">
+            <h3>Chat dengan Penjual</h3>
+            <button class="close-button" id="closeChat">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="message-info">
+            <img src="https://via.placeholder.com/40" alt="EcoGoods Store">
+            <div class="details">
+                <p>EcoGoods Store</p>
+                <span>Bandung, Jawa Barat</span>
+            </div>
+        </div>
+        <div class="message-content">
+            <p>Halo! Ada yang bisa saya bantu?</p>
+        </div>
+        <button class="reply-button">Balas Pesan</button>
+    </div>
+
+    <script>
+        // Open Chat Popup
+        document.getElementById('openChat').addEventListener('click', () => {
+            document.querySelector('.overlay').style.display = 'block';
+            document.querySelector('.popup').style.display = 'block';
+        });
+
+        // Close Chat Popup
+        document.getElementById('closeChat').addEventListener('click', () => {
+            document.querySelector('.overlay').style.display = 'none';
+            document.querySelector('.popup').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclo - Moderasi Konten</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <div class="content p-6">
+        <!-- Dashboard Stats -->
+        <div class="grid grid-cols-4 gap-4 mb-6">
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500">Total Laporan</p>
+                        <h3 class="text-2xl font-bold">156</h3>
+                    </div>
+                    <i class="fas fa-flag text-red-500 text-2xl"></i>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500">Menunggu Review</p>
+                        <h3 class="text-2xl font-bold">42</h3>
+                    </div>
+                    <i class="fas fa-clock text-yellow-500 text-2xl"></i>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500">Dihapus Hari Ini</p>
+                        <h3 class="text-2xl font-bold">23</h3>
+                    </div>
+                    <i class="fas fa-trash text-red-500 text-2xl"></i>
+                </div>
+            </div>
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500">Disetujui Hari Ini</p>
+                        <h3 class="text-2xl font-bold">85</h3>
+                    </div>
+                    <i class="fas fa-check-circle text-green-500 text-2xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex space-x-4">
+                <select class="border rounded-lg px-3 py-2">
+                    <option value="all">Semua Kategori</option>
+                    <option value="illegal">Barang Ilegal</option>
+                    <option value="counterfeit">Barang Palsu</option>
+                    <option value="inappropriate">Konten Tidak Sesuai</option>
+                    <option value="misleading">Informasi Menyesatkan</option>
+                </select>
+                <select class="border rounded-lg px-3 py-2">
+                    <option value="all">Semua Status</option>
+                    <option value="pending">Menunggu Review</option>
+                    <option value="approved">Disetujui</option>
+                    <option value="rejected">Ditolak</option>
+                </select>
+            </div>
+            <div class="flex space-x-2">
+                <input type="text" placeholder="Cari produk..." class="border rounded-lg px-3 py-2">
+                <button class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Content List -->
+        <div class="bg-white rounded-lg shadow-sm">
+            <div class="grid grid-cols-1 divide-y">
+                <!-- Product Item -->
+                <div class="p-4">
+                    <div class="flex items-start space-x-4">
+                        <img src="https://via.placeholder.com/150" alt="Product" class="w-32 h-32 object-cover rounded-lg">
+                        <div class="flex-1">
+                            <div class="flex justify-between">
+                                <div>
+                                    <h3 class="font-semibold text-lg">Obat Tradisional XYZ</h3>
+                                    <p class="text-red-600">Dilaporkan: Produk tanpa izin BPOM</p>
+                                    <p class="text-gray-600 text-sm">Penjual: ecoStore</p>
+                                    <p class="text-gray-600 text-sm">Tanggal Upload: 2024-06-04</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button onclick="approveContent('123')" class="text-green-600 hover:text-green-800">
+                                        <i class="fas fa-check-circle text-xl"></i>
+                                    </button>
+                                    <button onclick="showRemoveModal('123')" class="text-red-600 hover:text-red-800">
+                                        <i class="fas fa-times-circle text-xl"></i>
+                                    </button>
+                                    <button onclick="showDetailModal('123')" class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-eye text-xl"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Barang Ilegal</span>
+                                <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Menunggu Review</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more product items here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Remove Content Modal -->
+    <div id="removeModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 class="text-lg font-semibold mb-4">Hapus Konten</h3>
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-2">Alasan Penghapusan</label>
+                <select class="w-full border rounded-lg px-3 py-2 mb-2">
+                    <option value="illegal">Barang Ilegal</option>
+                    <option value="counterfeit">Barang Palsu</option>
+                    <option value="inappropriate">Konten Tidak Sesuai</option>
+                    <option value="misleading">Informasi Menyesatkan</option>
+                </select>
+                <textarea 
+                    class="w-full p-2 border rounded-lg"
+                    rows="3"
+                    placeholder="Tambahkan catatan untuk penjual..."
+                ></textarea>
+            </div>
+            <div class="flex justify-end space-x-3">
+                <button onclick="closeModal('removeModal')" class="px-4 py-2 border rounded-lg hover:bg-gray-50">
+                    Batal
+                </button>
+                <button onclick="removeContent()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                    Hapus
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showRemoveModal(contentId) {
+            document.getElementById('removeModal').classList.remove('hidden');
+            document.getElementById('removeModal').classList.add('flex');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.getElementById(modalId).classList.remove('flex');
+        }
+
+        function approveContent(contentId) {
+            if(confirm('Apakah Anda yakin ingin menyetujui konten ini?')) {
+                // Add approval logic here
+                alert('Konten disetujui');
+            }
+        }
+
+        function removeContent() {
+            // Add removal logic here
+            alert('Konten dihapus');
+            closeModal('removeModal');
+        }
+
+        function showDetailModal(contentId) {
+            // Add detail view logic here
+        }
+    </script>
+</body>
+</html>

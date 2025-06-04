@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclo - Detail Produk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<style>
+                 .content {
+            margin-left: 50px;
+            margin-right: 50px;
+            padding: 2rem;
+        }
+        .title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+        .notification-bar {
+            display: flex;
+            align-items: center;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            padding: 1rem;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            animation: slideIn 0.3s ease-out;
+            display: none;
+        }
+        .notification-bar .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #e5e7eb;
+            border-radius: 50%;
+            color: #374151;
+            font-size: 1.25rem;
+        }
+        .notification-bar .content {
+            flex-grow: 1;
+        }
+        .notification-bar .content .title {
+            font-weight: 600;
+            color: #1f2937;
+            margin: 0;
+        }
+        .notification-bar .content .message {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0.25rem 0;
+        }
+        .notification-bar .content .description {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin: 0;
+        }
+        .notification-bar .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .notification-bar .actions button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+        .notification-bar .actions .view-message {
+            background-color: #374151;
+            color: white;
+        }
+        .notification-bar .actions .view-message:hover {
+            background-color: #1f2937;
+        }
+        .notification-bar .actions .dismiss {
+            background-color: #e5e7eb;
+            color: #374151;
+        }
+        .notification-bar .actions .dismiss:hover {
+            background-color: #d1d5db;
+        }
+        .search-bar {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 1rem;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 0.5rem 2rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+        }
+        .search-bar i {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+        .chat-list {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            background-color: white;
+        }
+        .chat-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            position: relative;
+            transition: background-color 0.2s;
+        }
+        .chat-item:last-child {
+            border-bottom: none;
+        }
+        .chat-item:hover {
+            background-color: #f3f4f6;
+        }
+        .chat-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        .chat-item .details {
+            flex-grow: 1;
+        }
+        .chat-item .details p {
+            margin: 0;
+            color: #1f2937;
+            font-weight: 500;
+        }
+        .chat-item .details span {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        .chat-item .time {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        .chat-item.unread .details p {
+            font-weight: 600;
+        }
+        .chat-item.unread .details span {
+            color: #1f2937;
+        }
+        .chat-status {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+        .chat-status.online {
+            background-color: #10b981;
+        }
+        .chat-status.offline {
+            background-color: #6b7280;
+        }
+        .unread-count {
+            background-color: #ef4444;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+        .product-info {
+            display: block;
+            font-size: 0.75rem;
+            color: #10b981;
+            margin-top: 0.25rem;
+        }
+        .new-chat {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .new-chat i {
+            color: #8b5cf6;
+            margin-right: 0.5rem;
+        }
+        .new-chat p {
+            margin: 0.25rem 0;
+            color: #1f2937;
+        }
+        .new-chat button {
+            background-color: #374151;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            margin-top: 0.5rem;
+            cursor: pointer;
+        }
+        .new-chat button:hover {
+            background-color: #1f2937;
+        }
+        .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.popup {
+    background-color: white;
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 400px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.header h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #10b981;
+    margin: 0;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: #6b7280;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.message-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.message-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.message-info .details {
+    flex-grow: 1;
+}
+
+.message-info .details p {
+    margin: 0;
+    color: #1f2937;
+    font-weight: 500;
+}
+
+.message-info .details span {
+    color: #6b7280;
+    font-size: 0.875rem;
+}
+
+.message-content {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.message-content p {
+    margin: 0;
+    color: #4b5563;
+}
+
+.reply-button {
+    background-color: #374151;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 500;
+}
+
+.reply-button:hover {
+    background-color: #1f2937;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+    </style>
+<body>
+   <!-- Content -->
+    <div class="content">
+        <div class="title">Pesan Baru</div>
+
+        <div class="notification-bar">
+
+            <div class="content">
+                <p class="title">Pembeli Tertarik</p>
+                <p class="message">Anda memiliki pesan baru</p>
+                <p class="description">Seorang pembeli tertarik pada Tas Eco Anda. Periksa pesan mereka dan balas segera untuk meningkatkan peluang penjualan.</p>
+            </div>
+            <div class="actions">
+                <button class="view-message">Lihat Pesan</button>
+                <button class="dismiss">Tutup</button>
+            </div>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Cari berdasarkan nama atau produk">
+            <i class="fas fa-search"></i>
+        </div>
+
+        <h3 class="text-lg font-semibold text-green-600 mb-2">Obrolan</h3>
+
+        <div class="chat-list">
+            <!-- Template for chat items -->
+            <template id="chat-item-template">
+                <div class="chat-item">
+                    <div class="chat-status"></div>
+                    <img src="" alt="">
+                    <div class="details">
+                        <p class="buyer-name"></p>
+                        <span class="last-message"></span>
+                        <span class="product-info"></span>
+                    </div>
+                    <div class="meta">
+                        <span class="time"></span>
+                        <span class="unread-count"></span>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <div class="new-chat">
+            <p><i class="fas fa-comment"></i> Mulai Obrolan Baru</p>
+            <p>Cari pembeli untuk memulai percakapan.</p>
+            <button>Pesan Baru</button>
+        </div>
+    </div>
+
+    <div class="overlay" style="display: none;"></div>
+    <div class="popup" style="display: none;">
+        <div class="header">
+            <h3>Notifikasi Pesan Baru</h3>
+            <button class="close-button" id="closePopup">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="message-info">
+            <img src="https://via.placeholder.com/40" alt="Dewi Sari">
+            <div class="details">
+                <p>Dewi Sari</p>
+                <span>04 Jun 2025, 06:06 WIB</span>
+            </div>
+        </div>
+        <div class="message-content">
+            <p>Halo! Saya tertarik dengan Tas Eco yang Anda jual. Apakah masih tersedia? Berapa biaya pengirimannya ke Jakarta?</p>
+        </div>
+        <a href="chat.html" class="reply-button">Balas Pesan</a>
+    </div>
+
+    <script>
+        document.querySelector('.view-message').addEventListener('click', () => {
+        document.querySelector('.overlay').style.display = 'block';
+        document.querySelector('.popup').style.display = 'block';
+    });
+
+    document.getElementById('closePopup').addEventListener('click', () => {
+        document.querySelector('.overlay').style.display = 'none';
+        document.querySelector('.popup').style.display = 'none';
+    });
+
+    function checkNewMessages() {
+    // Simulate checking for new messages every 30 seconds
+    setInterval(async () => {
+        try {
+            const response = await fetch('get_new_messages.php');
+            const data = await response.json();
+            
+            if (data.hasNewMessages) {
+                updateNotificationBar(data.message);
+                updateChatList(data.chats);
+                playNotificationSound();
+            }
+        } catch (error) {
+            console.error('Error checking messages:', error);
+        }
+    }, 30000);
+}
+
+function playNotificationSound() {
+    const audio = new Audio('notification_sound.mp3');
+    audio.play();
+}
+
+// Call the function to start checking for new messages
+checkNewMessages();
+    </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize notifications
+    checkNewMessages();
+
+    // Chat item click handler
+    document.querySelector('.chat-list').addEventListener('click', function(e) {
+        const chatItem = e.target.closest('.chat-item');
+        if (!chatItem) return;
+
+        const buyerId = chatItem.dataset.buyerId;
+        const productId = chatItem.dataset.productId;
+        
+        // Open chat window
+        window.location.href = `chat.html?buyer=${buyerId}&product=${productId}`;
+    });
+
+    // New chat button handler
+    document.querySelector('.new-chat button').addEventListener('click', function() {
+        // Open new chat modal
+        const modal = document.querySelector('.popup');
+        modal.style.display = 'block';
+        document.querySelector('.overlay').style.display = 'block';
+    });
+
+    // Notification dismiss handler
+    document.querySelector('.dismiss').addEventListener('click', function() {
+        const notificationBar = document.querySelector('.notification-bar');
+        notificationBar.style.display = 'none';
+    });
+
+    // Update chat list function
+    function updateChatList(chats) {
+        const chatList = document.querySelector('.chat-list');
+        const template = document.getElementById('chat-item-template');
+
+        chats.forEach(chat => {
+            const existing = chatList.querySelector(`[data-chat-id="${chat.id}"]`);
+            if (existing) {
+                // Update existing chat
+                updateChatItem(existing, chat);
+            } else {
+                // Create new chat item
+                const newItem = template.content.cloneNode(true);
+                const chatItem = newItem.querySelector('.chat-item');
+                updateChatItem(chatItem, chat);
+                chatList.prepend(newItem);
+            }
+        });
+    }
+
+    function updateChatItem(element, chat) {
+        element.dataset.chatId = chat.id;
+        element.dataset.buyerId = chat.buyerId;
+        element.dataset.productId = chat.productId;
+        
+        element.querySelector('img').src = chat.buyerAvatar;
+        element.querySelector('.buyer-name').textContent = chat.buyerName;
+        element.querySelector('.last-message').textContent = chat.lastMessage;
+        element.querySelector('.time').textContent = chat.time;
+        element.querySelector('.product-info').textContent = chat.productName;
+        
+        if (chat.unreadCount > 0) {
+            element.querySelector('.unread-count').textContent = chat.unreadCount;
+            element.classList.add('unread');
+        } else {
+            element.classList.remove('unread');
+        }
+    }
+});
+</script>
+</body>
+</html>

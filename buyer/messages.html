@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclo - Detail Produk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<style>
+
+
+        .breadcrumb {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        .tab-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .tab-nav button {
+            padding: 0.5rem 1rem;
+            color: #6b7280;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .tab-nav button.active {
+            color: #10b981;
+            border-bottom: 2px solid #10b981;
+            font-weight: 600;
+        }
+        .chat-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .chat-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        .chat-item p {
+            margin: 0;
+            color: #1f2937;
+        }
+        .chat-item span {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+        .new-chat {
+            padding: 1.5rem;
+            background-color: #f3f4f6;
+            border-radius: 0.5rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .new-chat button {
+            background-color: #8b5cf6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+        }
+        .new-chat button:hover {
+            background-color: #7c3aed;
+        }
+    </style>
+<body>
+     <!-- Content -->
+    <div class="content">
+        <div class="breadcrumb">Beranda > Dasbor > Pesan</div>
+        <h2 class="text-2xl font-bold text-green-600 mb-4">Pesan</h2>
+
+        <h3 class="text-lg font-semibold text-green-600 mt-6 mb-2">Obrolan</h3>
+        <div class="relative mb-4">
+            <input type="text" placeholder="Cari berdasarkan nama atau produk" class="w-full p-2 pl-10 border rounded-lg">
+            <i class="fas fa-search absolute left-3 top-2 text-gray-400"></i>
+        </div>
+
+        <div class="space-y-4">
+            <div class="chat-item">
+                <img src="https://via.placeholder.com/40" alt="GreenThreads">
+                <div>
+                    <p>GreenThreads</p>
+                    <span>Jaket Denim Eco: Masih tersedia?</span>
+                </div>
+                <span class="ml-auto text-gray-400">hari ini</span>
+            </div>
+            <div class="chat-item">
+                <img src="https://via.placeholder.com/40" alt="EcoFinds">
+                <div>
+                    <p>EcoFinds</p>
+                    <span>Botol Air Reusable: Sudah dikirim!</span>
+                </div>
+                <span class="ml-auto text-gray-400">hari ini</span>
+            </div>
+            <div class="chat-item">
+                <img src="https://via.placeholder.com/40" alt="BambooGoods">
+                <div>
+                    <p>BambooGoods</p>
+                    <span>Kacamata Sunglass Bamboo: Bisa dapat diskon?</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="new-chat">
+            <p><i class="fas fa-comment text-purple-500 mr-2"></i> Mulai Obrolan Baru</p>
+            <p>Cari penjual untuk memulai percakapan.</p>
+            <button>Pesan Baru</button>
+        </div>
+    </div>
+</body>
+</html>

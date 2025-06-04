@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclo - Detail Pesanan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto p-4 max-w-3xl">
+        <div class="breadcrumb text-gray-500 mb-2">Beranda > Lacak Pesanan > Detail Pesanan</div>
+        <h1 class="text-2xl font-bold text-green-600 mb-6">Detail Pesanan</h1>
+
+        <!-- Order Info Card -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="flex items-center space-x-4 mb-4">
+                <img src="https://via.placeholder.com/80" alt="Product Image" class="rounded-lg">
+                <div>
+                    <h2 class="font-semibold text-xl">Jaket Denim Daur Ulang</h2>
+                    <p class="text-gray-600">Order ID: #ORD123456</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-b py-4 my-4">
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Status</span>
+                    <span class="font-semibold text-green-600">Dikirim</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Tanggal Pemesanan</span>
+                    <span>12 Mei 2024</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Total Pembayaran</span>
+                    <span class="font-semibold">Rp 250.000</span>
+                </div>
+            </div>
+
+            <!-- Tracking Timeline -->
+            <div class="space-y-4">
+                <h3 class="font-semibold mb-4">Status Pengiriman</h3>
+                <div class="flex items-center text-green-600">
+                    <div class="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center">
+                        <i class="fas fa-check text-white text-sm"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="font-semibold">Pesanan Dikirim</p>
+                        <p class="text-sm text-gray-500">14 Mei 2024, 10:30</p>
+                    </div>
+                </div>
+                <div class="flex items-center text-green-600">
+                    <div class="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center">
+                        <i class="fas fa-check text-white text-sm"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="font-semibold">Pesanan Dikemas</p>
+                        <p class="text-sm text-gray-500">13 Mei 2024, 15:45</p>
+                    </div>
+                </div>
+                <div class="flex items-center text-green-600">
+                    <div class="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center">
+                        <i class="fas fa-check text-white text-sm"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="font-semibold">Pembayaran Diterima</p>
+                        <p class="text-sm text-gray-500">12 Mei 2024, 09:15</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shipping Details -->
+        <div class="bg-white rounded-lg shadow-sm p-6">
+            <h3 class="font-semibold mb-4">Informasi Pengiriman</h3>
+            <div class="space-y-2">
+                <p><span class="text-gray-600">Penerima:</span> John Doe</p>
+                <p><span class="text-gray-600">No. Telepon:</span> +62 812-3456-7890</p>
+                <p><span class="text-gray-600">Alamat:</span> Jl. Contoh No. 123, Kota Contoh, 12345</p>
+                <p><span class="text-gray-600">Kurir:</span> JNE Express</p>
+                <p><span class="text-gray-600">No. Resi:</span> JNE123456789</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

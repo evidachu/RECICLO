@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclo - Keranjang</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <div class="content p-6">
+        <div class="breadcrumb mb-2">Beranda > Keranjang</div>
+        <h1 class="text-2xl font-bold text-green-600 mb-6">Keranjang Belanja</h1>
+
+        <div class="grid grid-cols-3 gap-6">
+            <!-- Cart Items -->
+            <div class="col-span-2">
+                <!-- Seller Group -->
+                <div class="bg-white rounded-lg shadow-sm p-4 mb-4">
+                    <div class="flex items-center mb-4">
+                        <input type="checkbox" class="mr-3">
+                        <i class="fas fa-store text-gray-600 mr-2"></i>
+                        <span class="font-semibold">ecoGenZ</span>
+                    </div>
+
+                    <!-- Cart Item -->
+                    <div class="flex items-center justify-between py-4 border-t">
+                        <div class="flex items-center space-x-4">
+                            <input type="checkbox" class="mr-2">
+                            <img src="https://via.placeholder.com/80" alt="Sikat Gigi Bambu" class="rounded-lg">
+                            <div>
+                                <p class="font-semibold">Sikat Gigi Bambu</p>
+                                <p class="text-green-600 font-semibold">Rp 45.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center border rounded">
+                                <button class="px-3 py-1 hover:bg-gray-100">-</button>
+                                <input type="number" value="1" class="w-12 text-center border-x">
+                                <button class="px-3 py-1 hover:bg-gray-100">+</button>
+                            </div>
+                            <button class="text-red-500 hover:text-red-700">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Another Seller Group -->
+                <div class="bg-white rounded-lg shadow-sm p-4 mb-4">
+                    <div class="flex items-center mb-4">
+                        <input type="checkbox" class="mr-3">
+                        <i class="fas fa-store text-gray-600 mr-2"></i>
+                        <span class="font-semibold">thriftQueen</span>
+                    </div>
+
+                    <!-- Cart Item -->
+                    <div class="flex items-center justify-between py-4 border-t">
+                        <div class="flex items-center space-x-4">
+                            <input type="checkbox" class="mr-2">
+                            <img src="https://via.placeholder.com/80" alt="Botol Minum" class="rounded-lg">
+                            <div>
+                                <p class="font-semibold">Botol Minum Stainless</p>
+                                <p class="text-green-600 font-semibold">Rp 120.000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center border rounded">
+                                <button class="px-3 py-1 hover:bg-gray-100">-</button>
+                                <input type="number" value="1" class="w-12 text-center border-x">
+                                <button class="px-3 py-1 hover:bg-gray-100">+</button>
+                            </div>
+                            <button class="text-red-500 hover:text-red-700">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
+                    <h2 class="text-lg font-semibold mb-4">Ringkasan Belanja</h2>
+                    <div class="space-y-4">
+                        <div class="flex justify-between pb-4 border-b">
+                            <span>Total Harga (2 barang)</span>
+                            <span class="font-semibold">Rp 165.000</span>
+                        </div>
+
+                        <a href="checkout.html" class="block">
+                            <button class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700">
+                                Checkout
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add functionality for quantity buttons
+        document.querySelectorAll('.flex.items-center.border.rounded').forEach(container => {
+            const minusBtn = container.querySelector('button:first-child');
+            const plusBtn = container.querySelector('button:last-child');
+            const input = container.querySelector('input');
+
+            minusBtn.addEventListener('click', () => {
+                if (input.value > 1) {
+                    input.value = parseInt(input.value) - 1;
+                }
+            });
+
+            plusBtn.addEventListener('click', () => {
+                input.value = parseInt(input.value) + 1;
+            });
+        });
+    </script>
+</body>
+</html>

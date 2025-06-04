@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclo - Manajemen Pengguna</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <div class="content p-6">
+        <!-- Tabs Navigation -->
+        <div class="flex space-x-4 mb-6">
+            <button onclick="switchTab('overview')" class="tab-btn px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-gray-100 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:hover:bg-green-700" data-state="active">Overview</button>
+            <button onclick="switchTab('verification')" class="tab-btn px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-gray-100 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:hover:bg-green-700">Verifikasi</button>
+            <button onclick="switchTab('sanctions')" class="tab-btn px-4 py-2 rounded-lg transition-colors duration-200 hover:bg-gray-100 data-[state=active]:bg-green-600 data-[state=active]:text-white data-[state=active]:hover:bg-green-700">Sanksi</button>
+        </div>
+
+        <!-- Stats Overview -->
+        <div id="overview-tab" class="tab-content">
+            <div class="grid grid-cols-4 gap-4 mb-6">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500">Total Pengguna</p>
+                            <h3 class="text-2xl font-bold">8,245</h3>
+                        </div>
+                        <i class="fas fa-users text-blue-500 text-2xl"></i>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm cursor-pointer" onclick="switchTab('verification')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500">Menunggu Verifikasi</p>
+                            <h3 class="text-2xl font-bold">1,800</h3>
+                        </div>
+                        <i class="fas fa-user-clock text-yellow-500 text-2xl"></i>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm cursor-pointer" onclick="switchTab('sanctions')">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500">Pelanggaran</p>
+                            <h3 class="text-2xl font-bold">89</h3>
+                        </div>
+                        <i class="fas fa-gavel text-red-500 text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User List Table -->
+            <div class="bg-white rounded-lg shadow-sm">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Pengguna</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tipe</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Bergabung</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <img src="https://via.placeholder.com/40" alt="User" class="w-10 h-10 rounded-full">
+                                    <div class="ml-4">
+                                        <div class="font-medium">John Doe</div>
+                                        <div class="text-sm text-gray-500">john@example.com</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Penjual</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Aktif</span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">
+                                1 Juni 2024
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex space-x-2">
+                                    <button onclick="viewUserDetails('user1')" class="text-blue-600 hover:text-blue-800">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button onclick="editUser('user1')" class="text-green-600 hover:text-green-800">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <a href="user-sanctions.html?user=user1" class="text-red-600 hover:text-red-800">
+                                        <i class="fas fa-gavel"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Add more user rows here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Verification Tab -->
+        <div id="verification-tab" class="tab-content hidden">
+            <iframe src="user-verification.html" class="w-full h-screen border-none"></iframe>
+        </div>
+
+        <!-- Sanctions Tab -->
+        <div id="sanctions-tab" class="tab-content hidden">
+            <iframe src="user-sanctions.html" class="w-full h-screen border-none"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tabName) {
+            // Remove active state from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.setAttribute('data-state', 'inactive');
+            });
+            
+            // Add active state to clicked button
+            event.target.setAttribute('data-state', 'active');
+            
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName + '-tab').classList.remove('hidden');
+        }
+
+        // Show overview tab by default
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.tab-btn').click();
+        });
+    </script>
+
+    <style>
+        /* Remove @apply usage; use Tailwind classes directly in HTML elements */
+    </style>
+</body>
+</html>

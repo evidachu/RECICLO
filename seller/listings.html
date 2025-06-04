@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="admin.css" rel="stylesheet">
+    <style>
+
+         .content {
+            margin-left: 50px;
+            margin-right: 50px;
+            padding: 2rem;
+        }
+        .breadcrumb {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        .title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .search-bar {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 0.5rem 2rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+        }
+        .search-bar i {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+        .add-button {
+            background-color: #374151;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .add-button:hover {
+            background-color: #1f2937;
+        }
+        .add-button i {
+            margin-right: 0.5rem;
+        }
+        .table-container {
+            background-color: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        th {
+            background-color: #f9fafb;
+            font-weight: 500;
+            color: #4b5563;
+        }
+        td {
+            color: #1f2937;
+        }
+        .product-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.375rem;
+            object-fit: cover;
+        }
+        .status.active {
+            color: #10b981;
+            font-weight: 500;
+        }
+        .status.inactive {
+            color: #f59e0b;
+            font-weight: 500;
+        }
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .actions button {
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.2s;
+        }
+        .actions button:hover {
+            background-color: #f3f4f6;
+        }
+        .actions .edit-btn {
+            color: #10b981;
+        }
+        .actions .delete-btn {
+            color: #ef4444;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .pagination button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            background-color: white;
+            cursor: pointer;
+        }
+        .pagination button.active {
+            background-color: #374151;
+            color: white;
+            border: none;
+        }
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .modal-content h3 {
+            color: #1f2937;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .delete-btn {
+            background-color: #ef4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background-color: #6b7280;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+<body>
+   <!-- Content -->
+    <div class="content">
+        <div class="breadcrumb">Dasbor > Daftar Jual</div>
+        <div class="title">Daftar Jual Anda</div>
+
+        <div class="header">
+            <div class="search-bar">
+                <input type="text" placeholder="Cari berdasarkan nama produk">
+                <i class="fas fa-search"></i>
+            </div>
+            <button class="add-button">
+                                    <a href="add-listings.html" target="mainContent" class="flex items-center space-x-4" onclick="setActiveLink(this)">
+<i class="fas fa-plus"></i> Tambah Item
+                    </a>
+            </button>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Harga</th>
+                        <th>Stok</th>
+                        <th>Terjual</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-product-id="1">
+                        <td>
+                            <div class="flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="Eco Tote Bag" class="product-image">
+                                <span class="ml-2">Tas Eco</span>
+                            </div>
+                        </td>
+                        <td>Rp 45.000</td>
+                        <td>10</td>
+                        <td>5</td>
+                        <td><span class="status active">Aktif</span></td>
+                        <td>
+                            <div class="actions">
+                                <button onclick="editItem(this)" class="edit-btn" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button onclick="confirmDelete(this)" class="delete-btn" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-product-id="2">
+                        <td>
+                            <div class="flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="Vintage Jacket" class="product-image">
+                                <span class="ml-2">Jaket Vintage</span>
+                            </div>
+                        </td>
+                        <td>Rp 120.000</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td><span class="status active">Aktif</span></td>
+                        <td>
+                            <div class="actions">
+                                <button onclick="editItem(this)" class="edit-btn" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button onclick="confirmDelete(this)" class="delete-btn" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-product-id="3">
+                        <td>
+                            <div class="flex items-center">
+                                <img src="https://via.placeholder.com/40" alt="Bamboo Sunglasses" class="product-image">
+                                <span class="ml-2">Kacamata Bamboo</span>
+                            </div>
+                        </td>
+                        <td>Rp 150.000</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td><span class="status inactive">Tidak Aktif</span></td>
+                        <td>
+                            <div class="actions">
+                                <button onclick="editItem(this)" class="edit-btn" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button onclick="confirmDelete(this)" class="delete-btn" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+            <button><i class="fas fa-chevron-left"></i></button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div id="deleteModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Konfirmasi Hapus</h3>
+            <p>Apakah Anda yakin ingin menghapus item ini?</p>
+            <div class="modal-actions">
+                <button id="confirmDelete" class="delete-btn">Hapus</button>
+                <button id="cancelDelete" class="cancel-btn">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Pagination functionality
+        document.querySelectorAll('.pagination button').forEach(button => {
+            button.addEventListener('click', () => {
+                if (button.querySelector('i')) return; // Skip arrow buttons
+                document.querySelector('.pagination button.active').classList.remove('active');
+                button.classList.add('active');
+            });
+        });
+
+        function editItem(button) {
+            const row = button.closest('tr');
+            const productName = row.querySelector('td:first-child span').textContent;
+            const productId = row.dataset.productId;
+            // Redirect to edit page with product ID
+            window.location.href = `edit-listing.html?id=${productId}`;
+        }
+
+        function confirmDelete(button) {
+            const row = button.closest('tr');
+            const productName = row.querySelector('td:first-child span').textContent;
+            const modal = document.getElementById('deleteModal');
+            modal.style.display = 'flex';
+            
+            document.getElementById('confirmDelete').onclick = () => {
+                // Here you would typically make an API call to delete the item
+                row.remove();
+                modal.style.display = 'none';
+            };
+            
+            document.getElementById('cancelDelete').onclick = () => {
+                modal.style.display = 'none';
+            };
+        }
+
+        // Close modal when clicking outside
+        window.onclick = (event) => {
+            const modal = document.getElementById('deleteModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+</html>

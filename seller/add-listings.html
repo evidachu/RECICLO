@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="admin.css" rel="stylesheet">
+    <style>
+
+         .content {
+            margin-left: 50px;
+            margin-right: 50px;
+            padding: 2rem;
+        }
+        .breadcrumb {
+            color: #6b7280;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        .title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            background-color: #f9fafb;
+            resize: vertical;
+        }
+        .form-group textarea {
+            height: 100px;
+        }
+        .photo-upload {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .photo-upload img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 0.375rem;
+            border: 1px solid #e5e7eb;
+        }
+        .photo-upload .upload-placeholder {
+            background-color: #f9fafb;
+            border: 1px dashed #e5e7eb;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            cursor: pointer;
+        }
+        .save-button {
+            background-color: #374151;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .save-button:hover {
+            background-color: #1f2937;
+        }
+    </style>
+
+</head>
+<body>
+     <!-- Content -->
+    <div class="content">
+        <div class="breadcrumb">Dasbor > Daftar Jual > Tambah Item</div>
+        <h2 class="title">Tambah Item Baru</h2>
+
+        <div class="form-group">
+            <label for="item-name">Nama Item</label>
+            <input type="text" id="item-name" placeholder="Masukkan nama item">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Deskripsi</label>
+            <textarea id="description" placeholder="Jelaskan item Anda"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Harga (Rp)</label>
+            <input type="number" id="price" placeholder="Tetapkan harga">
+        </div>
+
+        <div class="form-group">
+            <label for="stock">Stok</label>
+            <input type="number" id="stock" placeholder="Jumlah item yang tersedia">
+        </div>
+
+        <div class="form-group">
+            <label>Unggah Foto</label>
+            <div class="photo-upload">
+                <div class="upload-placeholder">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Unggah Foto</p>
+                </div>
+                <img src="https://via.placeholder.com/150" alt="Photo 1">
+                <img src="https://via.placeholder.com/150" alt="Photo 2">
+            </div>
+        </div>
+
+        <button class="save-button">Simpan Daftar</button>
+    </div>
+
+    <script>
+        // Placeholder for upload functionality (basic simulation)
+        document.querySelector('.upload-placeholder').addEventListener('click', () => {
+            alert('Fitur unggah foto akan segera diaktifkan!');
+        });
+    </script>
+</body>
+</html>

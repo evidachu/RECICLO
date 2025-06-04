@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclo - Detail Produk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<style>
+        .tab-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .tab-nav button {
+            padding: 0.5rem 1rem;
+            color: #6b7280;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .tab-nav button.active {
+            color: #10b981;
+            border-bottom: 2px solid #10b981;
+            font-weight: 600;
+        }
+        .card {
+            background-color: #f3f4f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .card i {
+            margin-right: 0.75rem;
+        }
+        .card button {
+            background-color: #8b5cf6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+        }
+        .card button:hover {
+            background-color: #7c3aed;
+        }
+        .setting-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .setting-item i {
+            margin-right: 1rem;
+            color: #4b5563;
+        }
+        .setting-item .toggle {
+            margin-left: auto;
+        }
+    </style>
+<body>
+    <!-- Content -->
+    <div class="content">
+        <div class="breadcrumb">Beranda > Akun</div>
+        <h2 class="text-2xl font-bold text-green-600 mb-4">Ikhtisar Akun</h2>
+        <div class="tab-nav">
+            <button class="active">Profil</button>
+            <button>Keamanan</button>
+            <button>Alamat</button>
+            <button>Preferensi</button>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 mb-6">
+            <div class="card">
+                <div class="flex items-center">
+                    <i class="fas fa-user text-purple-500"></i>
+                    <div>
+                        <p class="font-semibold">Informasi Pribadi</p>
+                        <p class="text-gray-600">Lihat dan edit nama, email, dan detail kontak Anda.</p>
+                    </div>
+                </div>
+                <button>Edit</button>
+            </div>
+            <div class="card">
+                <div class="flex items-center">
+                    <i class="fas fa-leaf text-purple-500"></i>
+                    <div>
+                        <p class="font-semibold">Statistik Keberlanjutan</p>
+                        <p class="text-gray-600">Lihat dampak lingkungan Anda dan lencana yang diperoleh.</p>
+                    </div>
+                </div>
+                <button>Lihat</button>
+            </div>
+            <div class="card">
+                <div class="flex items-center">
+                    <i class="fas fa-star text-purple-500"></i>
+                    <div>
+                        <p class="font-semibold">Ulasan</p>
+                        <p class="text-gray-600">Periksa peringkat dan umpan balik Anda.</p>
+                    </div>
+                </div>
+                <button>Lihat Ulasan</button>
+            </div>
+        </div>
+
+        <h3 class="text-lg font-semibold text-green-600 mb-4">Pengaturan Akun</h3>
+        <div class="space-y-2">
+            <div class="setting-item">
+                <i class="fas fa-lock"></i>
+                <div>
+                    <p class="font-semibold">Ubah Kata Sandi</p>
+                    <p class="text-gray-600">Perbarui kredensial login Anda</p>
+                </div>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </div>
+            <div class="setting-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <p class="font-semibold">Kelola Alamat</p>
+                    <p class="text-gray-600">Informasi pengiriman dan penagihan</p>
+                </div>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </div>
+            <div class="setting-item">
+                <i class="fas fa-bell"></i>
+                <div>
+                    <p class="font-semibold">Preferensi Notifikasi</p>
+                    <p class="text-gray-600">Peringatan email dan push</p>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="setting-item">
+                <i class="fas fa-trash"></i>
+                <div>
+                    <p class="font-semibold">Hapus Akun</p>
+                    <p class="text-gray-600">Hapus akun Anda secara permanen</p>
+                </div>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-sm p-4 mb-4">
+            <h2 class="text-lg font-semibold mb-4">Keamanan</h2>
+            
+            <a href="change-password.html" class="setting-item hover:bg-gray-50 cursor-pointer">
+                <i class="fas fa-lock"></i>
+                <div>
+                    <p class="font-semibold">Ubah Kata Sandi</p>
+                    <p class="text-gray-600">Perbarui kredensial login Anda</p>
+                </div>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </a>
+
+            <a href="manage-address.html" class="setting-item hover:bg-gray-50 cursor-pointer">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <p class="font-semibold">Kelola Alamat</p>
+                    <p class="text-gray-600">Informasi pengiriman dan penagihan</p>
+                </div>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </a>
+
+            <div class="setting-item hover:bg-gray-50">
+                <i class="fas fa-bell"></i>
+                <div>
+                    <p class="font-semibold">Preferensi Notifikasi</p>
+                    <p class="text-gray-600">Peringatan email dan push</p>
+                </div>
+                <label class="toggle cursor-pointer">
+                    <input type="checkbox" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
+            <a href="delete-account.html" class="setting-item hover:bg-gray-50 cursor-pointer text-red-600">
+                <i class="fas fa-trash"></i>
+                <div>
+                    <p class="font-semibold">Hapus Akun</p>
+                    <p class="text-gray-600">Hapus akun Anda secara permanen</p>
+                </div>
+                <i class="fas fa-chevron-right ml-auto text-gray-400"></i>
+            </a>
+
+            <div class="border-t pt-4 mt-4">
+                <a href="report-seller.html" class="flex items-center justify-between text-red-600 hover:text-red-700">
+                    <span class="flex items-center">
+                        <i class="fas fa-flag mr-3"></i>
+                        Laporkan Penjual
+                    </span>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

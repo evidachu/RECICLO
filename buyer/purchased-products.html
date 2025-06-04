@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclo - Produk Dibeli</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto p-4">
+        <div class="breadcrumb text-gray-500 mb-2">Beranda > Produk Dibeli</div>
+        <h1 class="text-2xl font-bold text-green-600 mb-6">Produk Yang Telah Dibeli</h1>
+
+        <!-- Product List -->
+        <div class="grid gap-4">
+            <!-- Product Item -->
+            <div class="bg-white p-4 rounded-lg shadow-sm">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://via.placeholder.com/80" alt="Product" class="rounded-lg">
+                        <div>
+                            <h3 class="font-semibold">Jaket Denim Daur Ulang</h3>
+                            <p class="text-gray-600 text-sm">Dibeli pada 12 Mei 2024</p>
+                            <p class="text-green-600 font-semibold">Rp 250.000</p>
+                        </div>
+                    </div>
+                    <button onclick="openReviewModal('1')" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                        Beri Ulasan
+                    </button>
+                </div>
+            </div>
+
+            <!-- Add more product items here -->
+        </div>
+    </div>
+
+    <!-- Review Modal - Update the modal div -->
+    <div id="reviewModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+        <div class="bg-white rounded-lg w-[600px] mx-4 max-h-[80vh] overflow-y-auto"> <!-- Changed width and height -->
+            <div class="p-4"> <!-- Reduced padding -->
+                <div class="flex justify-between items-center mb-3"> <!-- Reduced margin -->
+                    <h2 class="text-lg font-bold text-green-600">Beri Ulasan & Rating</h2> <!-- Reduced text size -->
+                    <button onclick="closeReviewModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Review Form with adjusted spacing -->
+                <div class="space-y-4"> <!-- Reduced spacing between sections -->
+                    <!-- Product Rating -->
+                    <div class="mb-4"> <!-- Reduced margin -->
+                        <h3 class="font-semibold mb-2 text-sm">Rating Produk</h3> <!-- Reduced text and margin -->
+                        <div class="star-rating mb-2"> <!-- Reduced margin -->
+                            <i class="far fa-star text-xl"></i> <!-- Reduced star size -->
+                            <i class="far fa-star text-xl"></i>
+                            <i class="far fa-star text-xl"></i>
+                            <i class="far fa-star text-xl"></i>
+                            <i class="far fa-star text-xl"></i>
+                        </div>
+                        <textarea 
+                            class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
+                            rows="3" <!-- Reduced rows -->
+                            placeholder="Bagaimana kualitas produk ini? Berikan ulasan Anda..."
+                        ></textarea>
+                    </div>
+
+                    <!-- Seller Rating -->
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2 text-sm">Rating Penjual</h3>
+                        <div class="star-rating mb-2">
+                            <i class="far fa-star text-xl"></i>
+                            <i class="far fa-star text-xl"></i>
+                            <i class="far fa-star text-xl"></i>
+                            <i class="far fa-star text-xl"></i>
+                            <i class="far fa-star text-xl"></i>
+                        </div>
+                        <textarea 
+                            class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
+                            rows="3"
+                            placeholder="Bagaimana pelayanan penjual? Berikan ulasan Anda..."
+                        ></textarea>
+                    </div>
+
+                    <!-- Upload Photos -->
+                    <div class="mb-4">
+                        <h3 class="font-semibold mb-2 text-sm">Unggah Foto (Opsional)</h3>
+                        <div class="flex space-x-2">
+                            <label class="w-20 h-20 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-green-500">
+                                <input type="file" class="hidden" accept="image/*">
+                                <i class="fas fa-plus text-gray-400"></i>
+                            </label>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Maksimal 3 foto (2MB per foto)</p>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="flex justify-end">
+                        <button class="bg-green-600 text-white px-4 py-1.5 rounded-lg hover:bg-green-700 text-sm">
+                            Kirim Ulasan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openReviewModal(productId) {
+            const modal = document.getElementById('reviewModal');
+            const modalContent = modal.querySelector('div');
+            
+            // Load review form content
+            modalContent.innerHTML = `
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-green-600">Beri Ulasan & Rating</h2>
+                        <button onclick="closeReviewModal()" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <!-- Copy the review form content from review-rating.html here -->
+                    ${document.getElementById('reviewFormTemplate').innerHTML}
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeReviewModal() {
+            const modal = document.getElementById('reviewModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('reviewModal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                closeReviewModal();
+            }
+        });
+    </script>
+
+    <!-- Template for review form -->
+    <template id="reviewFormTemplate">
+        <!-- Copy the review form content from review-rating.html here, excluding the container div -->
+        <div class="bg-white rounded-lg">
+            <!-- Product Rating -->
+            <div class="mb-6">
+                <h3 class="font-semibold mb-3">Rating Produk</h3>
+                <div class="star-rating mb-3">
+                    <i class="far fa-star" onclick="setProductRating(1)"></i>
+                    <i class="far fa-star" onclick="setProductRating(2)"></i>
+                    <i class="far fa-star" onclick="setProductRating(3)"></i>
+                    <i class="far fa-star" onclick="setProductRating(4)"></i>
+                    <i class="far fa-star" onclick="setProductRating(5)"></i>
+                </div>
+                <textarea 
+                    class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    rows="4"
+                    placeholder="Bagaimana kualitas produk ini? Berikan ulasan Anda..."
+                ></textarea>
+            </div>
+
+            <!-- Seller Rating -->
+            <div class="mb-6">
+                <h3 class="font-semibold mb-3">Rating Penjual</h3>
+                <div class="star-rating mb-3">
+                    <i class="far fa-star" onclick="setSellerRating(1)"></i>
+                    <i class="far fa-star" onclick="setSellerRating(2)"></i>
+                    <i class="far fa-star" onclick="setSellerRating(3)"></i>
+                    <i class="far fa-star" onclick="setSellerRating(4)"></i>
+                    <i class="far fa-star" onclick="setSellerRating(5)"></i>
+                </div>
+                <textarea 
+                    class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                    rows="4"
+                    placeholder="Bagaimana pelayanan penjual? Berikan ulasan Anda..."
+                ></textarea>
+            </div>
+
+            <!-- Upload Photos -->
+            <div class="mb-6">
+                <h3 class="font-semibold mb-3">Unggah Foto (Opsional)</h3>
+                <div class="flex space-x-2">
+                    <label class="w-24 h-24 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center cursor-pointer hover:border-green-500">
+                        <input type="file" class="hidden" accept="image/*">
+                        <i class="fas fa-plus text-gray-400"></i>
+                    </label>
+                </div>
+                <p class="text-sm text-gray-500 mt-2">Maksimal 3 foto (2MB per foto)</p>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end">
+                <button class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700">
+                    Kirim Ulasan
+                </button>
+            </div>
+        </div>
+    </template>
+</body>
+</html>

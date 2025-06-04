@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclo - overview Penjualan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<style>
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    .filters {
+        display: flex;
+        gap: 0.5rem;
+    }
+    .filters button {
+        padding: 0.5rem 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.375rem;
+        background-color: white;
+        color: #4b5563;
+        cursor: pointer;
+    }
+    .filters button.active {
+        background-color: #374151;
+        color: white;
+        border: none;
+    }
+    .chart-container {
+        background-color: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.375rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    .chart-container canvas {
+        width: 100%;
+        height: 300px;
+    }
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+    .stats .card {
+        background-color: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.375rem;
+        padding: 1rem;
+    }
+    .stats .card h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+    }
+    .stats .card p {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #10b981;
+        margin: 0;
+    }
+    .stats .card span {
+        font-size: 0.875rem;
+        color: #6b7280;
+    }
+    .status-tabs {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #E5E7EB;
+    }
+    .status-tabs button {
+        padding: 0.5rem 1rem;
+        color: #6B7280;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+    .status-tabs button.active {
+        color: #10B981;
+        border-bottom: 2px solid #10B981;
+        font-weight: 600;
+    }
+    .tab-content {
+        display: none;
+    }
+    .tab-content.active {
+        display: block;
+    }
+    .order-item {
+        background-color: #FFFFFF;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        padding: 1rem;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .order-item img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #E5E7EB;
+    }
+</style>
+<body>
+    <!-- Main Content -->
+    <div class="content p-4">
+        <h1 class="text-2xl font-bold text-green-600 mb-4">overview Penjualan</h1>
+
+                <!-- Status Tabs -->
+        <div class="status-tabs">
+            <button class="active" onclick="showTab('active')">Active</button>
+            <button onclick="showTab('pending')">Pending</button>
+            <button onclick="showTab('completed')">Completed</button>
+        </div>
+
+        <!-- Tab Content Sections -->
+        <div id="tab-active" class="tab-content active">
+            <div class="order-item">
+                <div class="flex items-center space-x-3">
+                    <img src="https://via.placeholder.com/40" alt="Eco Denim Jacket">
+                    <div>
+                        <p class="font-semibold">Jaket Denim Daur Ulang</p>
+                        <p class="text-gray-600">Active</p>
+                    </div>
+                </div>
+                <div class="text-center text-sm">
+                    <p class="text-gray-600">12 Mei 2024</p>
+                    <p class="text-green-600 font-semibold">Rp 250.000</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-pending" class="tab-content">
+            <div class="order-item">
+                <div class="flex items-center space-x-3">
+                    <img src="https://via.placeholder.com/40" alt="Organic Cotton Tote">
+                    <div>
+                        <p class="font-semibold">Tas Katun Organik</p>
+                        <p class="text-gray-600">Pending</p>
+                    </div>
+                </div>
+                <div class="text-center text-sm">
+                    <p class="text-gray-600">15 Mei 2024</p>
+                    <p class="text-green-600 font-semibold">Rp 180.000</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-completed" class="tab-content">
+            <div class="order-item">
+                <div class="flex items-center space-x-3">
+                    <img src="https://via.placeholder.com/40" alt="Reusable Water Bottle">
+                    <div>
+                        <p class="font-semibold">Botol Air Reusable</p>
+                        <p class="text-gray-600">Completed</p>
+                    </div>
+                </div>
+                <div class="text-center text-sm">
+                    <p class="text-gray-600">8 Mei 2024</p>
+                    <p class="text-green-600 font-semibold">Rp 120.000</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="header">
+            <div class="filters">
+                <button class="active">Harian</button>
+                <button>Mingguan</button>
+                <button>Bulanan</button>
+            </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="chart-container">
+            <canvas id="salesChart"></canvas>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats">
+            <div class="card">
+                <h4>Total Pendapatan</h4>
+                <p>Rp 1.250.000</p>
+                <span>04 Jun 2025</span>
+            </div>
+            <div class="card">
+                <h4>Pesanan Selesai</h4>
+                <p>15</p>
+                <span>04 Jun 2025</span>
+            </div>
+            <div class="card">
+                <h4>Item Terjual</h4>
+                <p>20</p>
+                <span>04 Jun 2025</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00'],
+                datasets: [{
+                    label: 'Penjualan (Rp)',
+                    data: [0, 100000, 250000, 400000, 600000, 800000, 1000000, 1250000],
+                    borderColor: '#374151',
+                    backgroundColor: 'rgba(55, 65, 81, 0.1)',
+                    fill: true,
+                    tension: 0 // Garis menjadi lurus
+                }]
+            },
+        });
+
+        function showTab(tabId) {
+            const tabs = document.querySelectorAll('.status-tabs button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            document.querySelector(`.status-tabs button[onclick="showTab('${tabId}')"]`).classList.add('active');
+
+            tabContents.forEach(content => {
+                if (content.id === `tab-${tabId}`) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showTab('active');
+        });
+
+        document.querySelectorAll('.filters button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelector('.filters button.active').classList.remove('active');
+                button.classList.add('active');
+                alert(`Filter diubah ke: ${button.textContent}`);
+            });
+        });
+    </script>
+</body>
+</html>

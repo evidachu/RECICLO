@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran - Reciclo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto p-4 max-w-5xl">
+        <div class="breadcrumb text-gray-500 mb-4">Beranda > Keranjang > Checkout > Pembayaran</div>
+        
+        <!-- Progress Steps -->
+        <div class="flex justify-center mb-8">
+            <div class="flex items-center">
+                <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center">✓</div>
+                <div class="text-green-600 mx-2">Checkout</div>
+                <div class="h-1 w-16 bg-green-600"></div>
+                <div class="bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center">2</div>
+                <div class="text-green-600 mx-2">Pembayaran</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-6">
+            <!-- Payment Methods -->
+            <div class="col-span-2">
+                <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                    <h2 class="text-lg font-semibold mb-4">Metode Pembayaran</h2>
+                    
+                    <!-- E-Wallet -->
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-3">E-Wallet</h3>
+                        <div class="space-y-3">
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment" class="mr-3">
+                                <img src="path-to-gopay-logo.png" alt="GoPay" class="h-6 mr-3">
+                                <span>GoPay</span>
+                            </label>
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment" class="mr-3">
+                                <img src="path-to-ovo-logo.png" alt="OVO" class="h-6 mr-3">
+                                <span>OVO</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Bank Transfer -->
+                    <div class="mb-6">
+                        <h3 class="font-semibold mb-3">Transfer Bank</h3>
+                        <div class="space-y-3">
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment" class="mr-3">
+                                <img src="path-to-bca-logo.png" alt="BCA" class="h-6 mr-3">
+                                <span>Bank BCA</span>
+                            </label>
+                            <label class="flex items-center p-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+                                <input type="radio" name="payment" class="mr-3">
+                                <img src="path-to-mandiri-logo.png" alt="Mandiri" class="h-6 mr-3">
+                                <span>Bank Mandiri</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="col-span-1">
+                <div class="bg-white rounded-lg shadow-sm p-6 sticky top-4">
+                    <h2 class="text-lg font-semibold mb-4">Ringkasan Pembayaran</h2>
+                    <div class="space-y-4">
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>Total Pesanan</span>
+                                <span>Rp 265.000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Biaya Layanan</span>
+                                <span>Rp 2.500</span>
+                            </div>
+                            <div class="flex justify-between font-semibold text-lg pt-2 border-t">
+                                <span>Total Pembayaran</span>
+                                <span>Rp 267.500</span>
+                            </div>
+                        </div>
+
+                        <!-- Replace the existing button -->
+                        <button onclick="showPaymentModal()" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700">
+                            Bayar Sekarang
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this modal at the bottom of the body tag, before closing -->
+    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div class="text-center">
+                <i class="fas fa-lock text-green-600 text-4xl mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Konfirmasi Pembayaran</h3>
+                <p class="text-gray-600 mb-4">Anda akan melakukan pembayaran sebesar:</p>
+                <p class="text-2xl font-bold text-green-600 mb-4">Rp 267.500</p>
+                
+                <div class="bg-gray-50 p-4 rounded-lg mb-4 text-left">
+                    <p class="text-sm text-gray-600 mb-2">Metode Pembayaran:</p>
+                    <p class="font-semibold" id="selectedPaymentMethod">-</p>
+                </div>
+
+                <div class="flex space-x-3">
+                    <button onclick="closePaymentModal()" class="flex-1 px-4 py-2 border rounded-lg hover:bg-gray-50">
+                        Batal
+                    </button>
+                    <button onclick="processPayment()" class="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                        Konfirmasi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this success modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div class="text-center">
+                <i class="fas fa-check-circle text-green-600 text-4xl mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Pembayaran Berhasil dengan Aman!</h3>
+                <p class="text-gray-600 mb-4">Terima kasih atas pembelian Anda</p>
+                <button onclick="goToOrderPage()" class="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                    Lihat Pesanan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function confirmPayment() {
+            // Here you would implement the payment processing
+            // For demo purposes, we'll just show an alert
+            alert('Pembayaran berhasil! Anda akan diarahkan ke halaman konfirmasi.');
+            window.location.href = 'order-confirmation.html';
+        }
+
+        function showPaymentModal() {
+            // Get selected payment method
+            const selectedRadio = document.querySelector('input[name="payment"]:checked');
+            if (!selectedRadio) {
+                alert('Silakan pilih metode pembayaran');
+                return;
+            }
+
+            const paymentMethod = selectedRadio.closest('label').querySelector('span').textContent;
+            document.getElementById('selectedPaymentMethod').textContent = paymentMethod;
+            
+            // Show modal
+            const modal = document.getElementById('paymentModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closePaymentModal() {
+            const modal = document.getElementById('paymentModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function processPayment() {
+            // Hide payment confirmation modal
+            closePaymentModal();
+
+            // Show loading state (optional)
+            setTimeout(() => {
+                // Show success modal
+                const successModal = document.getElementById('successModal');
+                successModal.classList.remove('hidden');
+                successModal.classList.add('flex');
+            }, 1500); // Simulate processing time
+        }
+
+        function goToOrderPage() {
+            window.location.href = 'order.html';
+        }
+
+        // Update the "Bayar Sekarang" button
+        document.querySelector('button:contains("Bayar Sekarang")').onclick = showPaymentModal;
+    </script>
+</body>
+</html>
